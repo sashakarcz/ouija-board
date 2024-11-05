@@ -73,7 +73,9 @@ document.getElementById("questionForm").addEventListener("submit", function(even
 function displayAnswer(answer) {
     const answerElement = document.getElementById("answer");
     answerElement.innerText = "Answer: " + answer;
+    answerElement.classList.add("show-answer"); // Trigger fade-in animation
 }
+
 
 const planchetteSize = 30; // Adjust this based on the actual size of the planchette in vw or vh
 const planchetteWindowOffset = planchetteSize / 2; // Offset to center the window

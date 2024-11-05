@@ -22,13 +22,49 @@
     transition: top 0.5s ease, left 0.5s ease; /* Smooth transition */
 }
 
-
+/* Form styling positioned just below the board */
 #questionForm {
-    margin-top: 20px;
+    position: absolute;
+    top: 540px; /* Positioning the form 20px below the board */
+    width: 100%;
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+    gap: 10px;
+}
+
+#questionInput {
+    width: 30%;
+    padding: 12px;
+    font-size: 1em;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+#questionInput:focus {
+    border-color: #333;
+}
+
+button[type="submit"] {
+    padding: 12px 20px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #333;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #555;
 }
 
 #answer {
-    margin-top: 20px;
     font-weight: bold;
     text-align: center;
+    margin-top: 20px;
+    color: #333;
 }

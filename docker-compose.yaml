@@ -2,7 +2,7 @@ services:
   ouija:
     image: ouija-board
     ports:
-      - "8157:80"
+      - "8157:8080"
     restart: unless-stopped
     environment:
       - "ENABLE_OTEL=true"
