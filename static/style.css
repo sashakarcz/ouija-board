@@ -1,0 +1,34 @@
+#board {
+    position: relative;
+    width: 800px; /* Adjust according to the board size */
+    height: 600px;
+    background: url('/static/board.png') no-repeat center center;
+    background-size: contain;
+    margin: 0 auto;
+    text-align: center;
+    overflow: hidden;
+}
+
+#planchette {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px; /* Adjust according to the planchette size */
+    height: 400px;
+    background: url('/static/planchette.png') no-repeat center center;
+    background-size: contain;
+    cursor: pointer;
+    transition: top 0.5s ease, left 0.5s ease; /* Smooth transition */
+}
+
+
+#questionForm {
+    margin-top: 20px;
+}
+
+#answer {
+    margin-top: 20px;
+    font-weight: bold;
+    text-align: center;
+}

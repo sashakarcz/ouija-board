@@ -1,0 +1,14 @@
+services:
+  paywall:
+    image: ouija-board
+    ports:
+      - "8157:80"
+    restart: unless-stopped
+    environment:
+      - "ENABLE_OTEL=true"
+      - "OTEL_EXPORTER_OTLP_ENDPOINT=http://192.168.1.169:4317"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ouija.entrypoints=websecure"
+      - "traefik.http.routers.ouija.rule=Host(`ouija.starnix.net`)"
+      - "traefik.http.services.ouija.loadbalancer.server.port=80"
