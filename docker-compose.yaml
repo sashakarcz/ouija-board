@@ -1,5 +1,5 @@
 services:
-  paywall:
+  ouija:
     image: ouija-board
     ports:
       - "8157:80"
