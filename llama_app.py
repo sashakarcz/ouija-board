@@ -50,7 +50,7 @@ def generate_answer(question):
         with requests.post(
             OLLAMA_INSTANCE_URL,
             json={
-                "model": "llama3.1",
+                "model": "olphin-llama3",
                 "prompt": mystical_prompt,
                 "options": {
                     "num_predict": 10
