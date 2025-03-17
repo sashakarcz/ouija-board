@@ -4,31 +4,9 @@ import os
 import requests  # Use requests to call Ollama API
 import bjoern
 
-# OpenTelemetry imports
-from opentelemetry import trace
-from opentelemetry.sdk.trace import TracerProvider
-from opentelemetry.sdk.resources import Resource
-from opentelemetry.sdk.trace.export import BatchSpanProcessor
-from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
-from opentelemetry.instrumentation.flask import FlaskInstrumentor
 
 app = Flask(__name__)
 
-# Optional OpenTelemetry instrumentation
-if os.environ.get("ENABLE_OTEL", "").lower() == "true":
-    # Setup OpenTelemetry tracing
-    resource = Resource(attributes={
-        "service.name": "ouija-flask-app"
-    })
-    provider = TracerProvider(resource=resource)
-    exporter = OTLPSpanExporter()
-    span_processor = BatchSpanProcessor(exporter)
-    provider.add_span_processor(span_processor)
-
-    trace.set_tracer_provider(provider)
-
-    # Instrument Flask
-    FlaskInstrumentor().instrument_app(app)
 # Load or initialize answers
 try:
     with open("answers.json", "r") as f:
@@ -41,7 +19,8 @@ OLLAMA_INSTANCE_URL = "http://nn.starnix.net:11435/api/generate"
 
 def generate_answer(question):
     # Define the mystical prompt for the Ouija board
-    mystical_prompt = f"Pretend that you are a Ouija board. As a mystical Ouija board, answer the following question in a short answer. Respond without using any actions, such as *smiles*, *laughs*, or any text within asterisks. If the question is a yes or no question, answer with a yes or a no. Question: {question}"
+    # mystical_prompt = f"Pretend that you are Mario's brother Luigi. As and Itialian plumber, and Bowser Blocker, answer the following question in a short answer. Respond without using any actions, such as *smiles*, *laughs*, or any text within asterisks. If the question is a yes or no question, answer with a yes or a no. If you get asked who you are, respond with: 'It's a me! Luigi!'. Ensure you answer all questions like a comical stereotypical Itilian and end each answer with a joke about Mario. Question: {question}"
+    mystical_prompt = f"Pretend that you are a Ouija board. As a mystical Ouija board, answer the following question in a short answer. Respond without using any actions, such as *smiles*, *laughs*, or any text within asterisks. If the question is a yes or no question, answer with a yes or a no. Ensure your answer sounds mystical. Question: {question}"
     
     answer = ""  # Initialize an empty answer string to collect the streamed responses
     
@@ -50,11 +29,12 @@ def generate_answer(question):
         with requests.post(
             OLLAMA_INSTANCE_URL,
             json={
+<<<<<<< HEAD
                 "model": "olphin-llama3",
+=======
+                "model": "dolphin-llama3",
+>>>>>>> ae916fe (Updates to theme and javascript)
                 "prompt": mystical_prompt,
-                "options": {
-                    "num_predict": 10
-                }
             },
             stream=True  # Enable streaming to handle line-by-line response
         ) as response:
