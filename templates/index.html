@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <title>Ouija Board</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='theme.css') }}"> <!-- New theme stylesheet -->
 </head>
 <body>
     <div class="container">
         <div id="board">
             <div id="planchette"></div> <!-- Empty planchette div for custom cursor image -->
         </div>
-
-        <!-- Form positioned directly below the board -->
+        <!-- Form positioned below the board -->
         <form id="questionForm">
             <input type="text" id="questionInput" placeholder="Ask your question...">
             <button type="submit">Ask</button>

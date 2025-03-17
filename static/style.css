@@ -1,3 +1,23 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #2e2e2e; /* Dark gray background */
+    color: #e0e0e0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
 #board {
     position: relative;
     width: 800px; /* Adjust according to the board size */
@@ -7,6 +27,8 @@
     margin: 0 auto;
     text-align: center;
     overflow: hidden;
+    border: 2px solid #555;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 #planchette {
@@ -22,11 +44,9 @@
     transition: top 0.5s ease, left 0.5s ease; /* Smooth transition */
 }
 
-/* Form styling positioned just below the board */
+/* Form styling positioned below the board */
 #questionForm {
-    position: absolute;
-    top: 540px; /* Positioning the form 20px below the board */
-    width: 100%;
+    margin-top: 20px; /* Add some space between the board and the form */
     display: flex;
     padding: 10px;
     justify-content: center;
@@ -37,21 +57,25 @@
     width: 30%;
     padding: 12px;
     font-size: 1em;
-    border: 2px solid #ddd;
+    border: 2px solid #555;
     border-radius: 5px;
     outline: none;
-    transition: border-color 0.3s;
+    transition: border-color 0.3s, width 0.3s, padding 0.3s; /* Add transition for width and padding */
+    background-color: #333;
+    color: #fff;
 }
 
 #questionInput:focus {
-    border-color: #333;
+    border-color: #e0e0e0;
+    width: 50%; /* Increase width when focused */
+    padding: 16px; /* Increase padding when focused */
 }
 
 button[type="submit"] {
     padding: 12px 20px;
     font-size: 1em;
     color: #fff;
-    background-color: #333;
+    background-color: #555;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -59,12 +83,12 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-    background-color: #555;
+    background-color: #777;
 }
 
 #answer {
     font-weight: bold;
     text-align: center;
     margin-top: 20px;
-    color: #333;
+    color: #e0e0e0;
 }

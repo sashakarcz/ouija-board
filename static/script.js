@@ -89,11 +89,13 @@ function animatePlanchette(answer) {
 
     // Check for special cases if the answer contains "YES", "NO", or "BYE"
     let specialPosition;
-    if (upperAnswer.includes("YES")) {
+    const words = upperAnswer.split(/\s+/); // Split the answer into words
+
+    if (words.includes("YES")) {
         specialPosition = letterPositions['YES'];
-    } else if (upperAnswer.includes("NO")) {
+    } else if (words.includes("NO")) {
         specialPosition = letterPositions['NO'];
-    } else if (upperAnswer.includes("BYE", "GOOD BYE", "FAREWELL", "NEXT TIME")) {
+    } else if (words.includes("BYE") || words.includes("GOODBYE") || words.includes("FAREWELL") || words.includes("NEXT TIME")) {
         specialPosition = letterPositions['GOOD BYE'];
     }
 
@@ -120,8 +122,21 @@ function animatePlanchette(answer) {
             }
 
             index++; // Move to the next letter
+
+            // Handle repeated letters by moving the planchette back and forth
+            if (index < letters.length && letters[index] === letter) {
+                setTimeout(() => {
+                    planchette.style.left = (position.x - planchetteWindowOffset + 10) + "%"; // Move more to the right
+                    planchette.style.top = (position.y - planchetteWindowOffset + 5) + "%"; // Move more down
+                }, 700); // Increase the pause duration
+            } else if (index < letters.length && letters[index] === '-') {
+                setTimeout(() => {
+                    planchette.style.left = (position.x - planchetteWindowOffset + 10) + "%"; // Move slightly to the right
+                    planchette.style.top = (position.y - planchetteWindowOffset + 5) + "%"; // Move slightly down
+                }, 700); // Increase the pause duration
+            }
         } else {
             clearInterval(interval); // Stop the animation when done
         }
-    }, 700); // Adjust the timing for each movement as needed
+    }, 1400); // Increase the timing for each movement
 }
