@@ -37,7 +37,7 @@ except FileNotFoundError:
     answers = []
 
 # Ollama instance URL
-OLLAMA_INSTANCE_URL = "http://bork.starnix.net:11435/api/generate"
+OLLAMA_INSTANCE_URL = "http://192.168.1.86:11435/api/generate"
 
 def generate_answer(question):
     # Define the mystical prompt for the Ouija board
