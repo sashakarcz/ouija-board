@@ -1,14 +1,26 @@
 services:
   ouija:
-    image: ouija-board
+    image: ouija-board:go
     ports:
       - "8157:8080"
     restart: unless-stopped
     environment:
-      - "ENABLE_OTEL=true"
-      - "OTEL_EXPORTER_OTLP_ENDPOINT=http://nn.starnix.net:4317"
+      - "SERVER_ADDR=0.0.0.0:8080"
+      - "OLLAMA_URL=http://bork.starnix.net:11435/api/generate"
+      - "OLLAMA_MODEL=gemma3"
+      - "OLLAMA_TIMEOUT=30s"
+      - "MAX_TOKENS=10"
+      - "MAX_HISTORY_SIZE=1000"
+      - "RATE_LIMIT=10"
+      - "ENABLE_OTEL=false"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.ouija.entrypoints=websecure"
-      - "traefik.http.routers.ouija.rule=Host(`ouija.starnix.net`)"
-      - "traefik.http.services.ouija.loadbalancer.server.port=80"
+      - "traefik.http.routers.ouija.rule=Host(`ouija.service.starnix.net`)"
+      - "traefik.http.services.ouija.loadbalancer.server.port=8080"
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:8080/ || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s

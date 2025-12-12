@@ -3,21 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Ouija Board</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='theme.css') }}"> <!-- New theme stylesheet -->
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/theme.css">
 </head>
 <body>
     <div class="container">
         <div id="board">
-            <div id="planchette"></div> <!-- Empty planchette div for custom cursor image -->
+            <div id="planchette"></div>
         </div>
-        <!-- Form positioned below the board -->
         <form id="questionForm">
             <input type="text" id="questionInput" placeholder="Ask your question...">
             <button type="submit">Ask</button>
         </form>
     </div>
-    <p id="answer"></p> <!-- Answer displayed below the board and form -->
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <p id="answer"></p>
+    <script src="/static/script.js"></script>
 </body>
 </html>

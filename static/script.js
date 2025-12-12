@@ -87,23 +87,42 @@ function animatePlanchette(answer) {
     // Convert the answer to uppercase for consistent matching
     const upperAnswer = answer.toUpperCase().trim();
 
-    // Check for special cases if the answer contains "YES", "NO", or "BYE"
-    let specialPosition;
-    const words = upperAnswer.split(/\s+/); // Split the answer into words
+    // Remove punctuation for matching
+    const cleanAnswer = upperAnswer.replace(/[.,!?;:'"]/g, '').trim();
 
-    if (words.includes("YES")) {
+    console.log('Original answer:', answer);
+    console.log('Clean answer:', cleanAnswer);
+
+    // Check for special cases - YES, NO, or BYE
+    let specialPosition;
+
+    // Check if the answer is just "YES" (with or without punctuation)
+    if (cleanAnswer === "YES" || cleanAnswer.startsWith("YES ")) {
         specialPosition = letterPositions['YES'];
-    } else if (words.includes("NO")) {
+        console.log('Moving to YES position');
+    }
+    // Check if the answer is just "NO" (with or without punctuation)
+    else if (cleanAnswer === "NO" || cleanAnswer.startsWith("NO ")) {
         specialPosition = letterPositions['NO'];
-    } else if (words.includes("BYE") || words.includes("GOODBYE") || words.includes("FAREWELL") || words.includes("NEXT TIME")) {
+        console.log('Moving to NO position');
+    }
+    // Check for goodbye variations
+    else if (cleanAnswer === "BYE" || cleanAnswer.startsWith("BYE ") ||
+             cleanAnswer === "GOODBYE" || cleanAnswer.startsWith("GOODBYE ") ||
+             cleanAnswer === "FAREWELL" || cleanAnswer.startsWith("FAREWELL ") ||
+             cleanAnswer === "GOOD BYE" || cleanAnswer.startsWith("GOOD BYE ")) {
         specialPosition = letterPositions['GOOD BYE'];
+        console.log('Moving to GOOD BYE position');
     }
 
     if (specialPosition) {
         // Move planchette directly to the special position
+        console.log('Special position:', specialPosition);
         planchette.style.left = (specialPosition.x - planchetteWindowOffset) + "%";
         planchette.style.top = (specialPosition.y - planchetteWindowOffset) + "%";
         return; // Exit function after moving to special position
+    } else {
+        console.log('Spelling out answer letter by letter');
     }
 
     // If it's not a special case, proceed with spelling out each letter
